@@ -3,7 +3,9 @@ import TicketCard from "./(components)/TicketCard";
 
 const getTickets = async () => {
  try {
-   const res = await fetch('http://localhost:3000/api/tickets');
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/tickets`
+  );
    return res.json();
  } catch (error) {
   console.error('Failed to get tickets', error);
