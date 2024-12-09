@@ -6,7 +6,10 @@ mongoose.Promise = global.Promise;
 
 const ticketSchema = new Schema(
   {
-    title: String,
+    title: {
+      type: String,
+      required: true,
+    },
     description: String,
     category: String,
     priority: Number,
@@ -16,7 +19,9 @@ const ticketSchema = new Schema(
   },
   {
     timestamps: true,
-  });
+    collection: 'ticketCollection',
+  },
+);
 
 const Ticket = mongoose.models.Ticket || mongoose.model("Ticket", ticketSchema);
   

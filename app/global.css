@@ -43,12 +43,15 @@ body {
     @apply  rounded-xl p-4
   }
   label {
-    @apply mt-4
+    @apply mt-3
   }
   input,
   select,
   textarea {
-    @apply m-1 rounded  bg-card p-1;
+    @apply  rounded  bg-card p-1;
+  }
+  button{
+    @apply w-full mt-1;
   }
 }
 

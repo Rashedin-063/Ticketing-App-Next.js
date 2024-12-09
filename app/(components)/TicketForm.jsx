@@ -13,7 +13,9 @@ const TicketForm = () => {
     category: 'Hardware Problem',
   };
 
-  const [ formData, setFormData ] = useState(startingTicketData);
+  const [formData, setFormData] = useState(startingTicketData);
+  
+  const router = useRouter();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -25,6 +27,23 @@ const TicketForm = () => {
     }));
   };
 
+  const handleSubmit = async (e) => {
+   
+    
+    e.preventDefault();
+    const res = await fetch('/api/tickets', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({formData}),
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to create ticket');
+    }
+    router.refresh();
+    router.push('/');
+  }
+
    const categories = [
      'Hardware Problem',
      'Software Problem',
@@ -34,8 +53,11 @@ const TicketForm = () => {
 
   return (
     <div className='flex justify-center'>
-      <form className='flex flex-col gap-3 w-3/4 lg:w-1/2 border p-4'>
-        <h3 className="text-center">Create Your Ticket</h3>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-col gap-1 w-3/4 lg:w-1/2 border p-4'
+      >
+        <h3 className='text-center'>Create Your Ticket</h3>
         <label>Title</label>
         <input
           id='title'
@@ -68,7 +90,7 @@ const TicketForm = () => {
         </select>
 
         <label>Priority</label>
-        <div>
+        <div >
           <input
             id='priority-1'
             name='priority'
@@ -131,7 +153,11 @@ const TicketForm = () => {
           <option value='started'>Started</option>
           <option value='done'>Done</option>
         </select>
-        <input type='submit' className='btn max-w-xs' value={'Create Ticket'} />
+        <input
+          type='submit'
+          className='btn w-full mt-4'
+          value={'Create Ticket'}
+        />
       </form>
     </div>
   );
