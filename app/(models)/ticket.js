@@ -1,7 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 
-mongoose.connect(process.env.MONGODB_URI);
+//mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(
+  'mongodb+srv://rashedinislam06:i1daGHFkhDW9Tj6q@cluster0.4qgkjzt.mongodb.net/ticketDB'
+);
 mongoose.Promise = global.Promise;
 
 const ticketSchema = new Schema(
