@@ -1,10 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 
-//mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect(
-  'mongodb+srv://rashedinislam06:i1daGHFkhDW9Tj6q@cluster0.4qgkjzt.mongodb.net/ticketDB'
-);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
 
 const ticketSchema = new Schema(
@@ -22,9 +19,7 @@ const ticketSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: 'ticketCollection',
-  },
-);
+  });
 
 const Ticket = mongoose.models.Ticket || mongoose.model("Ticket", ticketSchema);
   
