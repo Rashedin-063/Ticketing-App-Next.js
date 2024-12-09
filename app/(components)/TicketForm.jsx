@@ -15,8 +15,9 @@ const TicketForm = () => {
 
   const { formData, setFormData } = useState(startingTicketData);
 
-  const handleChange = () => { 
-    
+  const handleChange = (e) => { 
+    const value = e.target.value;
+    const name = e.target.name;
   }
 
 
