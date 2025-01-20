@@ -20,7 +20,7 @@ export default async function Dashboard() {
   
 
   return (
-    <div className='p-5'>
+    <div className='min-h-screen flex justify-center items-center w-full p-5'>
       <div>
         {tickets &&
           uniqueCategories?.map((uniqueCategory, categoryIndex) => (
