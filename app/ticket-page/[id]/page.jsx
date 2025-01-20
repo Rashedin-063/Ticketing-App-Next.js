@@ -2,7 +2,7 @@ import TicketForm from "@/app/(components)/TicketForm";
 
 const gitTicketById = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/${id}`);
+    const res = await fetch(`http://localhost:3000/api/tickets/${id}`);
    
     if (!res.ok) {
       throw new Error('Failed to get ticket');
