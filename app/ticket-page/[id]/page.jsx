@@ -16,7 +16,7 @@ const gitTicketById = async (id) => {
 
 const singleTicketPage = async ({ params }) => {
   const { id } = await params;
-  console.log('id is', id)
+  // console.log('id is', id)
   
   const editMode = id === 'new' ? false : true;
 
@@ -24,12 +24,17 @@ const singleTicketPage = async ({ params }) => {
   
   if (editMode) { 
     updateTicketData = await gitTicketById(id);
-    console.log(updateTicketData)
+    updateTicketData = updateTicketData.foundTicket;
+    // console.log(updateTicketData)
     
+  } else {
+    updateTicketData = {
+      _id: 'new'
+    }
   }
   
   return (
-   <TicketForm/>
+    <TicketForm ticket={updateTicketData} />
   )
 }
 export default singleTicketPage;

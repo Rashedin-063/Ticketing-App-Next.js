@@ -3,7 +3,14 @@ import { useRouter } from "next/navigation";
 import React, { useState } from 'react'
 
 
-const TicketForm = () => {
+const TicketForm = ({ticket}) => {
+
+// console.log('ticket is', ticket)
+
+  const router = useRouter();
+  
+  const editMode = ticket._id === 'new' ? false : true;
+
   const startingTicketData = {
     title: '',
     description: '',
@@ -13,9 +20,18 @@ const TicketForm = () => {
     category: 'Hardware Problem',
   };
 
+  if (editMode) {
+   startingTicketData['title'] = ticket.title;
+   startingTicketData['description'] = ticket.description;
+   startingTicketData['priority'] = ticket.priority;
+   startingTicketData['progress'] = ticket.progress;
+   startingTicketData['status'] = ticket.status;
+   startingTicketData['category'] = ticket.category;
+  }
+
   const [formData, setFormData] = useState(startingTicketData);
+
   
-  const router = useRouter();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -28,18 +44,29 @@ const TicketForm = () => {
   };
 
   const handleSubmit = async (e) => {
-   
-    
     e.preventDefault();
-    const res = await fetch('/api/tickets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({formData}),
-    });
 
-    if (!res.ok) {
-      throw new Error('Failed to create ticket');
+    if (editMode) { 
+   const res = await fetch(`/api/tickets/${ticket._id}`, {
+     method: 'PUT',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({ formData }),
+   });
+      
+       if (!res.ok) {
+         throw new Error('Failed to update ticket');
+       }
+    } else {
+         const res = await fetch('/api/tickets', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ formData }),
+         });
+       if (!res.ok) {
+         throw new Error('Failed to create ticket');
+       }
     }
+
     router.refresh();
     router.push('/');
   }
@@ -47,7 +74,7 @@ const TicketForm = () => {
    const categories = [
      'Hardware Problem',
      'Software Problem',
-     'Application Deveopment',
+     'Application Development',
      'Project',
    ];
 
@@ -57,7 +84,9 @@ const TicketForm = () => {
         onSubmit={handleSubmit}
         className='flex flex-col gap-1 w-3/4 lg:w-1/2 border p-4'
       >
-        <h3 className='text-center'>Create Your Ticket</h3>
+        <h3 className='text-center'>
+          {editMode ? 'Update Your Ticket' : 'Create Your Ticket'}
+        </h3>
         <label>Title</label>
         <input
           id='title'
@@ -90,7 +119,7 @@ const TicketForm = () => {
         </select>
 
         <label>Priority</label>
-        <div >
+        <div>
           <input
             id='priority-1'
             name='priority'
@@ -156,7 +185,7 @@ const TicketForm = () => {
         <input
           type='submit'
           className='btn w-full mt-4'
-          value={'Create Ticket'}
+          value={editMode ? 'Update Ticket' : 'Create Ticket'}
         />
       </form>
     </div>

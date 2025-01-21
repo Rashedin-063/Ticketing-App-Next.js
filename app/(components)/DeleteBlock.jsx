@@ -4,12 +4,10 @@ import { FaX } from 'react-icons/fa6';
 
 
 const DeleteBlock = (params) => {
-  console.log(params)
-  console.log('hello')
-  
+
 
   const  {id}  = params;
-  console.log('the id is', id)
+  // console.log('the id is', id)
   
   const router = useRouter()
  
