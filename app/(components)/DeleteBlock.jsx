@@ -17,7 +17,7 @@ const DeleteBlock = (params) => {
    
     
    
-    const res = await fetch(`http://localhost:3000/api/${id}`, {
+    const res = await fetch(`http://localhost:3000/api/tickets/${id}`, {
       method: 'DELETE',
     });
     if (res.ok) {
