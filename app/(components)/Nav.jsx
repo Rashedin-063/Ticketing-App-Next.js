@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FaHome, FaTicketAlt } from 'react-icons/fa';
+import LoginForm from './LoginForm';
 const Nav = () => {
   return (
     <nav className='flex justify-between bg-nav p-4'>
@@ -12,7 +13,7 @@ const Nav = () => {
         </Link>
       </div>
       <div className='text-default-text'>
-        <p>rashedinislam.06@gmail.com</p>
+       <LoginForm/>
       </div>
     </nav>
   );

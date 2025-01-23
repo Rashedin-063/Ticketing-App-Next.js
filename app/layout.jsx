@@ -12,11 +12,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} antialiased`}>
-        <div className='flex flex-col h-screen max-h-screen'>
+      <body className={`${inter.className} antialiased bg-page`}>
+        <div className='flex flex-col min-h-screen mx-8 xl:mx-16'>
           <Nav />
 
-          <div className='flex-grow overflow-y-auto bg-page text-default-text'>
+          <div className='flex-grow overflow-y-auto  text-default-text'>
             {children}
           </div>
         </div>
