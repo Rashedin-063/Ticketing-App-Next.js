@@ -2,14 +2,14 @@
 
 const LoginForm = () => {
   return (
-    <Form>
+    <form>
       <button>
         Sign In With Google
       </button>
       <button>
         Sign In With Github
       </button>
-    </Form>
+    </form>
   )
 }
 export default LoginForm
