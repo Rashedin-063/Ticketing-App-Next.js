@@ -1,7 +1,17 @@
 import Link from 'next/link';
 import { FaHome, FaTicketAlt } from 'react-icons/fa';
 import LoginForm from './LoginForm';
-const Nav = () => {
+import {auth, signOut} from "@/auth"
+
+const Nav = async () => {
+  
+  const session = await auth();
+
+  const handleLogout = async() => {
+    await signOut();
+    alert('You have been logged out')
+  }
+
   return (
     <nav className='flex justify-between bg-nav p-4'>
       <div className='flex items-center space-x-4 '>
@@ -12,9 +22,15 @@ const Nav = () => {
           <FaTicketAlt className='icon' />
         </Link>
       </div>
-      <div className='text-default-text'>
-       <LoginForm/>
-      </div>
+      {session?.user ? (
+        <div className='text-white'>
+          <h1>{ session?.user?.name}</h1>
+        </div>
+      ) : (
+        <div className='text-default-text'>
+          <LoginForm />
+        </div>
+      )}
     </nav>
   );
 };
